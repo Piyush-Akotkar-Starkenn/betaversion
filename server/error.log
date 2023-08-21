@@ -1,0 +1,9 @@
+8/18/2023, 11:21:32 AM [ERROR]: Error adding customers: Bind parameters must not contain undefined. To pass SQL NULL specify JS null
+8/18/2023, 11:22:51 AM [ERROR]: Error adding customers: Bind parameters must not contain undefined. To pass SQL NULL specify JS null
+8/18/2023, 11:24:03 AM [ERROR]: Error adding customers: Bind parameters must not contain undefined. To pass SQL NULL specify JS null
+8/18/2023, 11:27:43 AM [ERROR]: Error adding customers: Bind parameters must not contain undefined. To pass SQL NULL specify JS null
+8/18/2023, 3:22:07 PM [ERROR]: Error updating user: pool.connection is not a function
+8/18/2023, 3:23:24 PM [ERROR]: Error updating user: pool.connection is not a function
+8/18/2023, 3:25:06 PM [ERROR]: Error updating user: pool.connection is not a function
+8/18/2023, 6:27:45 PM [ERROR]: Error updating user: Incorrect arguments to mysqld_stmt_execute
+8/18/2023, 6:28:45 PM [ERROR]: Error updating user: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' modified_at=?, modified_by = ? WHERE user_uuid=?' at line 1
