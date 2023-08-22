@@ -22,7 +22,6 @@ const Customers = () => {
   const [userType, setUserType] = useState(null);
   const toastRef = useRef(null);
   const toastErr = useRef(null);
-console.log("sapna");
   const [formErrors, setFormErrors] = useState({
     f_name: false,
     l_name: false,
