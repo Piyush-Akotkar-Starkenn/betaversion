@@ -14,6 +14,7 @@ import Cookies from "js-cookie";
 const Customers = () => {
   const token = Cookies.get("token");
   const userUUID = Cookies.get("user_uuid");
+  console.log("sapna");
 
   const [isListView, setIsListView] = useState(true);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
