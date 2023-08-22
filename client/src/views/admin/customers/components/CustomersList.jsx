@@ -86,7 +86,6 @@ const CustomersList = ({ data, onDelete, onUpdate }) => {
           }
           return customer;
         });
-
         setCustomerData(updatedData);
         onHide();
         toastRef.current.show({
@@ -486,6 +485,9 @@ const CustomersList = ({ data, onDelete, onUpdate }) => {
 
       case 2:
         return "danger";
+
+      default:
+        return null;
     }
   };
 
@@ -543,12 +545,6 @@ const CustomersList = ({ data, onDelete, onUpdate }) => {
           style={{ minWidth: "8rem" }}
           className="border-none dark:bg-gray-900 dark:text-gray-200"
         />
-        {/* <Column
-          field="full_address"
-          className="border-none dark:bg-gray-900 dark:text-gray-200"
-          header="Address"
-          style={{ width: "12rem", minWidth: "20rem" }}
-        /> */}
         <Column
           field="company_name"
           header="Company Name"
