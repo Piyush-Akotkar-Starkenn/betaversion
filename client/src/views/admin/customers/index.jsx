@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import CustomersList from "./components/CustomersList";
 import { Toast } from "primereact/toast";
 import CustomersGrid from "./components/CustomersGrid";
@@ -14,8 +14,7 @@ import Cookies from "js-cookie";
 const Customers = () => {
   const token = Cookies.get("token");
   const userUUID = Cookies.get("user_uuid");
-  console.log("sapna");
-
+  const [cust, setCust] = useState(true);
   const [isListView, setIsListView] = useState(true);
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -23,6 +22,7 @@ const Customers = () => {
   const [userType, setUserType] = useState(null);
   const toastRef = useRef(null);
   const toastErr = useRef(null);
+
   const [formErrors, setFormErrors] = useState({
     f_name: false,
     l_name: false,
@@ -46,18 +46,8 @@ const Customers = () => {
     }));
   };
 
-  //User Type options
-  const options = [
-    { label: "Customer", value: 2 },
-    { label: "Admin", value: 1 },
-  ];
-
-  // Fetching all data
   useEffect(() => {
-    fetchCustomersData();
-  }, []);
-
-  const fetchCustomersData = () => {
+    // fetchCustomersData();
     axios
       .get(`${process.env.REACT_APP_API_URL}/customers/get-all-customer`, {
         headers: { authorization: `bearer ${token}` },
@@ -78,7 +68,13 @@ const Customers = () => {
       .catch((err) => {
         console.log(err);
       });
-  };
+  }, [token, cust]);
+
+  //User Type options
+  const options = [
+    { label: "Customer", value: 2 },
+    { label: "Admin", value: 1 },
+  ];
 
   // delete api call
   const handleDeleteCustomer = async (customerId) => {
@@ -91,7 +87,7 @@ const Customers = () => {
 
       // Remove the deleted customer from the state
       setData((prevData) =>
-        prevData.filter((customer) => customer.userId !== customerId)
+        prevData.filter((customer) => customer.user_uuid !== customerId)
       );
     } catch (error) {
       console.error("Error deleting customer:", error);
@@ -109,7 +105,7 @@ const Customers = () => {
       // Update the customer data in the state
       setData((prevData) =>
         prevData.map((customer) =>
-          customer.userId === customerId
+          customer.user_uuid === customerId
             ? { ...customer, ...updatedData }
             : customer
         )
@@ -256,7 +252,7 @@ const Customers = () => {
           } Added successfully`,
           life: 3000,
         });
-        fetchCustomersData();
+        setCust(data);
       } else {
         console.log(response.data.message);
         toastRef.current.show({
@@ -430,7 +426,7 @@ const Customers = () => {
               </span>
             </div>
           </div>
-          <div className="mx-auto mt-8 w-[51vw]">
+          <div className="mx-auto mt-8">
             <span className="p-float-label">
               <InputText
                 id="email"
@@ -446,7 +442,7 @@ const Customers = () => {
               <label htmlFor="email">Email</label>
             </span>
           </div>
-          <div className="mx-auto mt-8 w-[51vw]">
+          <div className="mx-auto mt-8">
             <span className="p-float-label">
               <InputText
                 id="password"
@@ -477,7 +473,7 @@ const Customers = () => {
               </div>
             </span>
           </div>
-          <div className="mx-auto mt-8 w-[51vw]">
+          <div className="mx-auto mt-8">
             <span className="p-float-label">
               <InputText
                 id="confirmPassword"
@@ -493,7 +489,7 @@ const Customers = () => {
               <label htmlFor="confirmPassword">Confirm Password</label>
             </span>
           </div>
-          <div className="mx-auto mt-8 w-[51vw]">
+          <div className="mx-auto mt-8">
             <span
               className={`p-float-label ${
                 formErrors.user_type ? "p-invalid" : ""
@@ -512,7 +508,7 @@ const Customers = () => {
               <label htmlFor="user_type">User Type</label>
             </span>
           </div>
-          <div className="mx-auto mt-8 w-[51vw]">
+          <div className="mx-auto mt-8">
             <span className="p-float-label">
               <InputText
                 id="company_name"
@@ -528,7 +524,7 @@ const Customers = () => {
               <label htmlFor="company_name">Company Name</label>
             </span>
           </div>
-          <div className="mx-auto mb-3 mt-8 w-[51vw]">
+          <div className="mx-auto mb-3 mt-8">
             <span className="p-float-label">
               <InputText
                 id="phone"
@@ -544,10 +540,10 @@ const Customers = () => {
               <label htmlFor="phone">Contact Number</label>
             </span>
           </div>
-          <div className="mx-auto mt-6 w-[51vw]">
+          <div className="mx-auto mt-6">
             <span>Address:</span>
           </div>
-          <div className="mx-auto mt-2 w-[51vw]">
+          <div className="mx-auto mt-2">
             <span className="p-float-label">
               <InputText
                 id="address"
@@ -563,7 +559,7 @@ const Customers = () => {
               <label htmlFor="address">Flat No./ Plot No., Area/Society</label>
             </span>
           </div>
-          <div className="mx-auto mt-8 w-[51vw]">
+          <div className="mx-auto mt-8">
             <span className="p-float-label">
               <InputText
                 id="city"
@@ -579,7 +575,7 @@ const Customers = () => {
               <label htmlFor="city">City</label>
             </span>
           </div>
-          <div className="mx-auto mt-8 w-[51vw]">
+          <div className="mx-auto mt-8">
             <span className="p-float-label">
               <InputText
                 id="state"
@@ -595,7 +591,7 @@ const Customers = () => {
               <label htmlFor="state">State</label>
             </span>
           </div>
-          <div className="mx-auto mt-8 w-[51vw]">
+          <div className="mx-auto mt-8">
             <span className="p-float-label">
               <InputText
                 id="pincode"
