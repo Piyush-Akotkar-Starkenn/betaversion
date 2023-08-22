@@ -47,7 +47,6 @@ const Customers = () => {
   };
 
   useEffect(() => {
-    // fetchCustomersData();
     axios
       .get(`${process.env.REACT_APP_API_URL}/customers/get-all-customer`, {
         headers: { authorization: `bearer ${token}` },
